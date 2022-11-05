@@ -1,11 +1,17 @@
 from django.db import models
-from apps.authentication.models import User
 
+
+class Member(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    members = models.ManyToManyField(User, related_name='teams')
-    leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='leader_teams')
+    members = models.ManyToManyField(Member, related_name='teams')
+    leader = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='leader_teams')
     image = models.ImageField(upload_to='teams/')
     description = models.TextField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
