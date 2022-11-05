@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     # Local apps
+    'apps.authentication.apps.AuthenticationConfig',
+    'apps.zakovat.apps.ZakovatConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,8 +143,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# AUTH_USER_MODEL = 'authentication.User'
-# AUTHENTICATION_BACKENDS = ['apps.authentication.backends.EmailBackend']
+AUTH_USER_MODEL = 'authentication.User'
 
 
 REST_FRAMEWORK = {
