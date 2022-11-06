@@ -23,8 +23,9 @@ class Game(models.Model):
 class Result(models.Model):
     game = models.ForeignKey(Game, on_delete=models.DO_NOTHING)
     winner = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
+    loser = models.ForeignKey(Team, on_delete=models.DO_NOTHING, related_name='loser')
     score1 = models.IntegerField()
     score2 = models.IntegerField()
 
     def __str__(self):
-        return self.team.name + ' - ' + str(self.score)
+        return self.game.team1.name + ' - ' + self.game.team2.name + ' ' + str(self.score1) + ' - ' + str(self.score2)
