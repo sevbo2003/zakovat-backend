@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication.apps.AuthenticationConfig',
     'apps.zakovat.apps.ZakovatConfig',
+    'apps.event.apps.EventConfig',
 ]
 
 MIDDLEWARE = [
