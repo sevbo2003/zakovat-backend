@@ -32,3 +32,12 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ['group', 'team1', 'team2', 'time', 'is_finished']
+
+
+class ResultSerializer(serializers.ModelSerializer):
+    game = serializers.StringRelatedField()
+    winner = serializers.StringRelatedField(source='winner.name')
+    loser = serializers.StringRelatedField(source='loser.name')
+    class Meta:
+        model = Result
+        fields = ['game', 'winner', 'loser', 'score1', 'score2']

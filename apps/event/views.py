@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from apps.event.serializers import GroupSerializer, GameSerializer
+from apps.event.serializers import GroupSerializer, GameSerializer, ResultSerializer
 from apps.event.models import Group, Game, Result
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.event.filters import GameFilter
@@ -17,3 +17,9 @@ class GameViewSet(ModelViewSet):
     http_method_names = ['get', 'head', 'options']
     filter_backends = [DjangoFilterBackend]
     filterset_class = GameFilter
+
+
+class ResultViewSet(ModelViewSet):
+    queryset = Result.objects.all().order_by('-id')
+    serializer_class = ResultSerializer
+    http_method_names = ['get', 'head', 'options']

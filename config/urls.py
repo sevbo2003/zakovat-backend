@@ -5,13 +5,14 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
 from apps.zakovat.views import TeamViewSet, MemberViewSet
-from apps.event.views import GroupViewSet, GameViewSet
+from apps.event.views import GroupViewSet, GameViewSet, ResultViewSet
 
 router = DefaultRouter()
 router.register('teams', TeamViewSet)
 router.register('members', MemberViewSet)
 router.register('groups', GroupViewSet)
 router.register('games', GameViewSet)
+router.register('results', ResultViewSet)
 
 
 urlpatterns = [

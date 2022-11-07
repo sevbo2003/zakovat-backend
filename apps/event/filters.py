@@ -1,4 +1,4 @@
-from apps.event.models import Game
+from apps.event.models import Game, Result
 import django_filters
 
 
