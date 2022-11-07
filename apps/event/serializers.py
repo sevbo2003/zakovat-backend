@@ -23,3 +23,12 @@ class GroupSerializer(serializers.ModelSerializer):
                 y = 0
             teams[i.name] = [Game.objects.filter(Q(team1=i) | Q(team2=i)).count(), x + y]
         return teams
+
+
+class GameSerializer(serializers.ModelSerializer):
+    group = serializers.StringRelatedField()
+    team1 = serializers.StringRelatedField(source='team1.name')
+    team2 = serializers.StringRelatedField(source='team2.name')
+    class Meta:
+        model = Game
+        fields = ['group', 'team1', 'team2', 'time', 'is_finished']
