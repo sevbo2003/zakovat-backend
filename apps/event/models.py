@@ -22,8 +22,9 @@ class Game(models.Model):
 
 class Result(models.Model):
     game = models.ForeignKey(Game, on_delete=models.DO_NOTHING)
-    winner = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
-    loser = models.ForeignKey(Team, on_delete=models.DO_NOTHING, related_name='loser')
+    winner = models.ForeignKey(Team, on_delete=models.DO_NOTHING, null=True, blank=True)
+    loser = models.ForeignKey(Team, on_delete=models.DO_NOTHING, related_name='loser', null=True, blank=True)
+    draw = models.BooleanField(default=False)
     score1 = models.IntegerField()
     score2 = models.IntegerField()
 

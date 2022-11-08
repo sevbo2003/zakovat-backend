@@ -2,7 +2,7 @@ from rest_framework import serializers
 from apps.zakovat.serializers import TeamSerializer
 from apps.event.models import Group, Game, Result
 from django.db.models import Q, F, Sum, Count, Case, When, IntegerField, Value, CharField, OuterRef, Subquery, Max, Min
-
+from rest_framework import exceptions
 
 class GroupSerializer(serializers.ModelSerializer):
     teams = serializers.SerializerMethodField()
@@ -21,7 +21,18 @@ class GroupSerializer(serializers.ModelSerializer):
                 y = Result.objects.filter(loser=i).annotate(score=Sum("score2")).values('score').first()['score']
             except:
                 y = 0
-            teams[i.name] = [Game.objects.filter(Q(team1=i) | Q(team2=i)).count(), x + y]
+            try:
+                z = i.team2.filter(result__draw=True).annotate(score=Sum("result__score1")).values('score').first()['score']
+            except TypeError:
+                try:
+                    z = i.team1.filter(result__draw=True).annotate(score=Sum("result__score1")).values('score').first()['score']
+                except:
+                    z = 0
+            teams[i.name] = {
+                            "games": Game.objects.filter(Q(team1=i) | Q(team2=i)).count(),
+                            "ball": x + y + z,
+                            "score": Result.objects.filter(winner=i).count() * 3 + i.team1.filter(result__draw=True).count() + i.team2.filter(result__draw=True).count(),
+                        }
         return teams
 
 
