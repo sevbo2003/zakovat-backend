@@ -51,4 +51,4 @@ class ResultSerializer(serializers.ModelSerializer):
     loser = serializers.StringRelatedField(source='loser.name')
     class Meta:
         model = Result
-        fields = ['game', 'winner', 'loser', 'score1', 'score2']
+        fields = ['game', 'winner', 'loser','draw', 'score1', 'score2']
