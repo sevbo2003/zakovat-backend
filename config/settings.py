@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.authentication.apps.AuthenticationConfig',
     'apps.zakovat.apps.ZakovatConfig',
     'apps.event.apps.EventConfig',
+    'apps.extrapages.apps.ExtrapagesConfig',
 ]
 
 MIDDLEWARE = [
