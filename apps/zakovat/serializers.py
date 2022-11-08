@@ -8,7 +8,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ['id', 'name', 'leader', 'members', 'image', 'description']
+        fields = ['id', 'name', 'leader', 'members', 'image', 'description', 'slug']
 
 
 class MemberSerializer(serializers.ModelSerializer):

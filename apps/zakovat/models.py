@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Member(models.Model):
@@ -15,9 +16,14 @@ class Team(models.Model):
     image = models.ImageField(upload_to='teams/')
     description = models.TextField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
         return self.name
     
     class Meta:
         ordering = ['-created_at']
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Team, self).save(*args, **kwargs)

@@ -9,5 +9,6 @@ class TeamAdmin(admin.ModelAdmin):
     list_filter = ('name', 'leader', 'created_at')
     search_fields = ('name', 'leader', 'created_at')
     ordering = ('-created_at',)
+    prepopulated_fields = {'slug': ('name',)}
 
 
