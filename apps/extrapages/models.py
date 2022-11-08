@@ -20,3 +20,10 @@ class BestPlayer(models.Model):
     description = models.CharField(max_length=50)
     team = models.CharField(max_length=100)
     group = models.CharField(max_length=5)
+
+
+class BestPlayerInfo(models.Model):
+    description = models.CharField(max_length=300)
+
+    def __str__(self) -> str:
+        return self.description
