@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from apps.zakovat.models import Team, Member
 from apps.zakovat.serializers import TeamSerializer, MemberSerializer
 from apps.event.serializers import ResultSerializer
+from apps.event.models import Result
 from typing import List
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -18,7 +19,7 @@ class TeamViewSet(ModelViewSet):
     @action(detail=True, methods=['get'], url_name='past-results')
     def nim_chorak_results(self, request, slug=None):
         team = self.get_object()
-        query = team.result_set.all() | team.loser.all()
+        query = team.result_set.all() | team.loser.all() | Result.objects.filter(draw=True, game__team1=team) | Result.objects.filter(draw=True, game__team2=team)
         query = query.order_by("game__time")
         serializer = ResultSerializer(query, many=True)
         return Response({
@@ -58,7 +59,7 @@ class TeamViewSet(ModelViewSet):
     @action(detail=True, methods=['get'])
     def draws(self, request, slug=None):
         team = self.get_object()
-        results = team.team1.filter(result__draw=True) | team.team2.filter(result__draw=True)
+        results = Result.objects.filter(draw=True, game__team1=team) | Result.objects.filter(draw=True, game__team2=team)
         serializer = ResultSerializer(results, many=True)
         return Response({
             "team": {
