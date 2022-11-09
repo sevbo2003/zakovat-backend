@@ -26,6 +26,6 @@ class BestPlayerViewSet(viewsets.ViewSet):
         return Response(
             {
                 "description": info.description,
-                "info": serializer.data
+                "information": serializer.data
             }
         )
