@@ -28,5 +28,11 @@ class Result(models.Model):
     score1 = models.IntegerField()
     score2 = models.IntegerField()
 
+    def save(self, *args, **kwargs):
+        game = self.game
+        game.is_finished = True
+        game.save()
+        super(Result, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.game.team1.name + ' - ' + self.game.team2.name + ' ' + str(self.score1) + ' - ' + str(self.score2)
