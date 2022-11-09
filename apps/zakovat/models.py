@@ -34,3 +34,9 @@ def load_members():
         for line in f:
             id, first_name, last_name = line.strip().split(',')
             Member.objects.create(first_name=first_name, last_name=last_name)
+            print(f"Created member {first_name} {last_name}")
+        print("""
+            ########################################################
+            ###         Members loaded successfully!             ###
+            ########################################################
+        """)
