@@ -1,8 +1,10 @@
 from django.contrib import admin
 from apps.authentication.models import User
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 
 
+admin.site.unregister(Group)
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('email','username', 'first_name', 'last_name', 'is_staff', 'is_active')
