@@ -29,6 +29,7 @@ class GroupSerializer(serializers.ModelSerializer):
                 except:
                     z = 0
             teams[i.name] = {
+                            "id": i.id,
                             "games": Game.objects.filter(Q(team1=i) | Q(team2=i)).count(),
                             "ball": x + y + z,
                             "score": Result.objects.filter(winner=i).count() * 3 + i.team1.filter(result__draw=True).count() + i.team2.filter(result__draw=True).count(),
