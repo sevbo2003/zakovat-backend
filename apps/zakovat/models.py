@@ -27,3 +27,10 @@ class Team(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Team, self).save(*args, **kwargs)
+
+
+def load_members():
+    with open('members.csv') as f:
+        for line in f:
+            id, first_name, last_name = line.strip().split(',')
+            Member.objects.create(first_name=first_name, last_name=last_name)
