@@ -13,9 +13,10 @@ class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     http_method_names: List[str] = ['get', 'head', 'options']
+    lookup_field = 'slug'
 
     @action(detail=True, methods=['get'], url_name='past-results')
-    def nim_chorak_results(self, request, pk=None):
+    def nim_chorak_results(self, request, slug=None):
         team = self.get_object()
         query = team.result_set.all() | team.loser.all()
         query = query.order_by("game__time")
@@ -29,7 +30,7 @@ class TeamViewSet(ModelViewSet):
             }, status=status.HTTP_200_OK)
     
     @action(detail=True, methods=['get'])
-    def wins(self, request, pk=None):
+    def wins(self, request, slug=None):
         team = self.get_object()
         results = team.result_set.all()
         serializer = ResultSerializer(results, many=True)
@@ -42,7 +43,7 @@ class TeamViewSet(ModelViewSet):
             }, status=status.HTTP_200_OK)
     
     @action(detail=True, methods=['get'])
-    def loses(self, request, pk=None):
+    def loses(self, request, slug=None):
         team = self.get_object()
         results = team.loser.all()
         serializer = ResultSerializer(results, many=True)
