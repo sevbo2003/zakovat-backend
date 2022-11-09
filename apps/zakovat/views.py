@@ -54,7 +54,19 @@ class TeamViewSet(ModelViewSet):
             },
             "results": serializer.data
             }, status=status.HTTP_200_OK)
-
+    
+    @action(detail=True, methods=['get'])
+    def draws(self, request, slug=None):
+        team = self.get_object()
+        results = team.team1.filter(result__draw=True) | team.team2.filter(result__draw=True)
+        serializer = ResultSerializer(results, many=True)
+        return Response({
+            "team": {
+                "id": team.id,
+                "name": team.name
+            },
+            "results": serializer.data
+            }, status=status.HTTP_200_OK)
 
 class MemberViewSet(ModelViewSet):
     queryset = Member.objects.all()
