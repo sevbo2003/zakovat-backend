@@ -27,3 +27,24 @@ class BestPlayerInfo(models.Model):
 
     def __str__(self) -> str:
         return self.description
+
+
+class CurrentGame(models.Model):
+    team1 = models.ForeignKey('zakovat.Team', on_delete=models.CASCADE, related_name='current_game_team1')
+    team2 = models.ForeignKey('zakovat.Team', on_delete=models.CASCADE, related_name='current_game_team2')
+    score1 = models.IntegerField()
+    score2 = models.IntegerField()
+
+
+    def __str__(self) -> str:
+        return f'{self.team1} - {self.team2}'
+
+
+class YouTubeLink(models.Model):
+    link = models.URLField()
+    description = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.description
+
+

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo
+from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame
 from typing import Sequence
 
 

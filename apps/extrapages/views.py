@@ -1,7 +1,7 @@
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets
-from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo
-from apps.extrapages.serializers import DeveloperSerializer, BestPlayerSerializer
+from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame
+from apps.extrapages.serializers import DeveloperSerializer, BestPlayerSerializer, CurrentGameSerializer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 
@@ -29,3 +29,14 @@ class BestPlayerViewSet(viewsets.ViewSet):
                 "information": serializer.data
             }
         )
+
+
+class CurrentGameViewSet(viewsets.ViewSet):
+    queryset = CurrentGame.objects.all()
+    serializer_class = CurrentGameSerializer
+    http_method_names = ['get', 'head', 'options']
+
+    def list(self, request):
+        object = self.queryset.last()
+        serializer = CurrentGameSerializer(object)
+        return Response(serializer.data, status=HTTP_200_OK)
