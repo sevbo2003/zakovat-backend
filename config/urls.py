@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 from apps.zakovat.views import TeamViewSet, MemberViewSet
 from apps.event.views import GroupViewSet, GameViewSet, ResultViewSet
-from apps.extrapages.views import DeveloperViewSet, BestPlayerViewSet, CurrentGameViewSet
+from apps.extrapages.views import DeveloperViewSet, BestPlayerViewSet, CurrentGameViewSet, YouTubeLinkViewSet
 
 
 router = DefaultRouter()
@@ -18,6 +18,7 @@ router.register('results', ResultViewSet)
 router.register('developers', DeveloperViewSet)
 router.register('best-players', BestPlayerViewSet)
 router.register('current-game', CurrentGameViewSet)
+router.register('youtube-link', YouTubeLinkViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
