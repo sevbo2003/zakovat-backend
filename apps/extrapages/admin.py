@@ -16,5 +16,4 @@ class AdminBestPlayer(admin.ModelAdmin):
 
 
 admin.site.register(BestPlayerInfo)
-admin.site.register(CurrentGame)
 admin.site.register(YouTubeLink)
