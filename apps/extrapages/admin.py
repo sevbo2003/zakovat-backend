@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame
+from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame, YouTubeLink
 from typing import Sequence
 
 
@@ -16,3 +16,5 @@ class AdminBestPlayer(admin.ModelAdmin):
 
 
 admin.site.register(BestPlayerInfo)
+admin.site.register(CurrentGame)
+admin.site.register(YouTubeLink)

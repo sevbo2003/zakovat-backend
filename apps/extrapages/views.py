@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets
-from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame
-from apps.extrapages.serializers import DeveloperSerializer, BestPlayerSerializer, CurrentGameSerializer
+from apps.extrapages.models import Developer, BestPlayer, BestPlayerInfo, CurrentGame, YouTubeLink
+from apps.extrapages.serializers import DeveloperSerializer, BestPlayerSerializer, CurrentGameSerializer, YouTubeLinkSerializer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 
@@ -39,4 +39,14 @@ class CurrentGameViewSet(viewsets.ViewSet):
     def list(self, request):
         object = self.queryset.last()
         serializer = CurrentGameSerializer(object)
+        return Response(serializer.data, status=HTTP_200_OK)
+
+
+class YouTubeLinkViewSet(viewsets.ViewSet):
+    queryset = YouTubeLink.objects.all()
+    serializer_class = YouTubeLinkSerializer
+    http_method_names = ['get', 'head', 'options']
+
+    def list(self, request):
+        serializer = YouTubeLinkSerializer(self.queryset.last())
         return Response(serializer.data, status=HTTP_200_OK)

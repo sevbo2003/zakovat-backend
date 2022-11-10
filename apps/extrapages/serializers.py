@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.extrapages.models import Developer, BestPlayer, CurrentGame
+from apps.extrapages.models import Developer, BestPlayer, CurrentGame, YouTubeLink
 
 
 class DeveloperSerializer(serializers.ModelSerializer):
@@ -20,3 +20,9 @@ class CurrentGameSerializer(serializers.ModelSerializer):
     class Meta:
         model = CurrentGame
         fields = ['team1', 'team2', 'score1', 'score2']
+
+
+class YouTubeLinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = YouTubeLink
+        fields = '__all__'
