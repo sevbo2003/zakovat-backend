@@ -17,7 +17,7 @@ class Developer(models.Model):
 class BestPlayer(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='best_players/')
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
     team = models.CharField(max_length=100)
     group = models.CharField(max_length=5)
 

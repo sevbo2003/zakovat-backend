@@ -18,7 +18,8 @@ class BestPlayerViewSet(viewsets.ViewSet):
     http_method_names = ['get', 'head', 'options']
 
     def list(self, request):
-        serializer = BestPlayerSerializer(self.queryset, many=True)
+        queryset = BestPlayer.objects.all()
+        serializer = BestPlayerSerializer(queryset, many=True)
         try:
             info = BestPlayerInfo.objects.all().first()
         except:
